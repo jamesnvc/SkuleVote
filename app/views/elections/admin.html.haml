@@ -1,0 +1,19 @@
+%h2 Active Elections
+
+- @active_elections.each do |election|
+	%ul.elections
+		%li
+			=link_to election.name, :action => 'vote', :id => election
+			%span.buttons
+				=link_to "Edit", "#"
+				=link_to "Show Results", "#"
+				
+	%br{:clear => 'both'}
+%h2 Inactive Elections
+
+- @inactive_elections.each do |election|
+	%ul.elections
+		%li
+			=link_to election.name, "#"
+			%span.buttons
+				=link_to "Show Results", "#"

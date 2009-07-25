@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  sp_id: 1
+  election_id: 1
+
+two:
+  sp_id: 1
+  election_id: 1

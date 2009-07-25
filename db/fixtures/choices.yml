@@ -1,0 +1,16 @@
+Pres1:
+  name: Alice
+  election: President
+  
+Pres2:
+  name: Bob
+  election: President
+  
+Pres3:
+  name: Catherine
+  election: President
+  
+Pres4:
+  name: David
+  election: President
+

@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  election_id: 1
+  candidate_id: 1
+  ranking: 1
+
+two:
+  election_id: 1
+  candidate_id: 1
+  ranking: 1

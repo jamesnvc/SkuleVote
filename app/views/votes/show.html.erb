@@ -1,0 +1,18 @@
+<p>
+  <b>Election:</b>
+  <%=h @vote.election_id %>
+</p>
+
+<p>
+  <b>Choice:</b>
+  <%=h @vote.choice_id %>
+</p>
+
+<p>
+  <b>Ranking:</b>
+  <%=h @vote.ranking %>
+</p>
+
+
+<%= link_to 'Edit', edit_vote_path(@vote) %> |
+<%= link_to 'Back', votes_path %>

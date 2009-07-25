@@ -1,0 +1,24 @@
+%h2= "Voting for: "+@election.name
+%p= @election.blurb
+
+%ul.choices#start
+	- i = 1
+	- @election.choices.each do |choice|
+		%li{:id => 'element_'+choice.id.to_s}
+			=choice.name
+%ul.choices#numbers
+	%li 1
+	%li 2
+	%li 3
+	%li 4
+	
+%ul.choices#end
+
+%br{:clear=>"both"}
+
+- form_for(@ballot) do |f|
+	= f.submit "Cast Vote"
+
+=link_to "&laquo; Vote Later", "/"
+
+

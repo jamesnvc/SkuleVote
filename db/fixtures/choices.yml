@@ -13,4 +13,28 @@ Pres3:
 Pres4:
   name: David
   election: President
+  
+VPFinance1:
+  name: Anna
+  election: VPFinance
+  
+VPFinance2:
+  name: Brandon
+  election: VPFinance
+  
+VPFinance3:
+  name: Christopher
+  election: VPFinance
+  
+VPFinance4:
+  name: Daniel
+  election: VPFinance
+  
+Levy1:
+  name: Yes
+  election: Levy
+  
+Levy2:
+  name: No
+  election: Levy
 

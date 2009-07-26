@@ -1,19 +1,26 @@
+%h2 Admin
+
+=link_to "New Election", :action => 'new'
+
 %h2 Active Elections
 
-- @active_elections.each do |election|
-	%ul.elections
+%ul.elections
+	- @active_elections.each do |election|
 		%li
 			=link_to election.name, :action => 'vote', :id => election
 			%span.buttons
-				=link_to "Edit", "#"
-				=link_to "Show Results", "#"
-				
+				=link_to "Edit", :action => 'edit', :id => election
+				=link_to "Results", :action => 'results', :id => election
+				=link_to "Votes", :action => 'votes', :id => election
+				=link_to "X", {:action => 'destroy', :id => election}, :confirm => "Destroy: Are you Sure?"
 	%br{:clear => 'both'}
+
 %h2 Inactive Elections
 
-- @inactive_elections.each do |election|
-	%ul.elections
+%ul.elections
+	- @inactive_elections.each do |election|
 		%li
 			=link_to election.name, "#"
 			%span.buttons
-				=link_to "Show Results", "#"
+				=link_to "Results", :action => 'results', :id => election
+				=link_to "Votes", :action => 'votes', :id => election

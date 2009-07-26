@@ -305,7 +305,7 @@ h1 {
   background: white;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-  padding: 0.25em 1em;
+  padding: 0.5em 1em;
   clear: both; }
 
 /* line 33, ../../app/stylesheets/screen.sass */
@@ -315,11 +315,16 @@ ul.elections {
   font-size: 2em; }
   /* line 37, ../../app/stylesheets/screen.sass */
   ul.elections li {
-    position: relative; }
-    /* line 39, ../../app/stylesheets/screen.sass */
+    position: relative;
+    margin: 0.5em 0;
+    background: #eee;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding-left: 0.5em; }
+    /* line 43, ../../app/stylesheets/screen.sass */
     ul.elections li a {
       text-decoration: none; }
-    /* line 42, ../../app/stylesheets/screen.sass */
+    /* line 46, ../../app/stylesheets/screen.sass */
     ul.elections li a.button {
       background: green;
       -moz-border-radius: 2px;
@@ -327,19 +332,19 @@ ul.elections {
       display: inline-block;
       color: #fff;
       padding: 0 0.25em;
-      margin: 0 0.5em 0 0;
+      margin: 0;
       position: absolute;
       right: 0;
       top: 0; }
       /* line 24, ../../app/stylesheets/partials/_base.sass */
       ul.elections li a.button:hover {
         background: #22a222; }
-    /* line 49, ../../app/stylesheets/screen.sass */
+    /* line 53, ../../app/stylesheets/screen.sass */
     ul.elections li .buttons {
       position: absolute;
       right: 0;
       top: 0; }
-      /* line 53, ../../app/stylesheets/screen.sass */
+      /* line 57, ../../app/stylesheets/screen.sass */
       ul.elections li .buttons a {
         background: green;
         -moz-border-radius: 2px;
@@ -347,29 +352,112 @@ ul.elections {
         display: inline-block;
         color: #fff;
         padding: 0 0.25em;
-        margin: 0 0.5em 0 0; }
+        margin: 0 0 0 0.25em; }
         /* line 24, ../../app/stylesheets/partials/_base.sass */
         ul.elections li .buttons a:hover {
           background: #22a222; }
 
-/* line 58, ../../app/stylesheets/screen.sass */
-ul.choices {
-  background: #ccc;
-  list-style: none;
-  float: left;
-  margin: 0; }
-  /* line 64, ../../app/stylesheets/screen.sass */
-  ul.choices li {
-    border: 1px solid red;
-    padding: 0 0.25em; }
+/* line 62, ../../app/stylesheets/screen.sass */
+#vote {
+  width: 90%;
+  margin: 1em auto 3em; }
+  /* line 66, ../../app/stylesheets/screen.sass */
+  #vote ul {
+    height: 100%;
+    float: left;
+    margin: 0;
+    font-size: 1.75em;
+    list-style: none; }
+    /* line 73, ../../app/stylesheets/screen.sass */
+    #vote ul li {
+      margin: 0 0 0.1em;
+      height: 1.5em;
+      line-height: 1.5em;
+      padding: 0 0.25em; }
+  /* line 79, ../../app/stylesheets/screen.sass */
+  #vote ul#start, #vote ul#end {
+    width: 40%;
+    position: relative; }
+    /* line 82, ../../app/stylesheets/screen.sass */
+    #vote ul#start li, #vote ul#end li {
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px; }
+  /* line 86, ../../app/stylesheets/screen.sass */
+  #vote ul#start {
+    margin-right: 10%;
+    min-width: 5em;
+    background: none;
+    padding-bottom: 0.01em; }
+    /* line 92, ../../app/stylesheets/screen.sass */
+    #vote ul#start li {
+      background: #ccc url(/images/icons/bullet_black.png) 95% center no-repeat;
+      cursor: url(/images/cursors/grab.cur), default; }
+  /* line 98, ../../app/stylesheets/screen.sass */
+  #vote ul#end {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding-bottom: 1.5em;
+    background: #eee; }
+    /* line 102, ../../app/stylesheets/screen.sass */
+    #vote ul#end li {
+      background: #eee url(/images/icons/bullet_green.png) 95% center no-repeat;
+      cursor: url(/images/cursors/grabbing.cur), default; }
+    /* line 106, ../../app/stylesheets/screen.sass */
+    #vote ul#end div#drop_message {
+      text-align: center;
+      color: #fff;
+      text-transform: uppercase;
+      background: #ccc;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 1.5em;
+      line-height: 1.5em;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px; }
+    /* line 118, ../../app/stylesheets/screen.sass */
+    #vote ul#end.onDrag div#drop_message {
+      background: green !important; }
 
-/* line 67, ../../app/stylesheets/screen.sass */
-ul#start {
-  margin-right: 1em;
-  min-width: 5em;
-  min-height: 5em; }
+/* line 123, ../../app/stylesheets/screen.sass */
+form input#submit, form input#spoil {
+  border: none;
+  font-size: 2em;
+  float: right;
+  margin: 0 0 0.25em 0.5em; }
+/* line 128, ../../app/stylesheets/screen.sass */
+form input#submit {
+  background: green;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  display: inline-block;
+  color: #fff;
+  padding: 0 0.25em; }
+  /* line 24, ../../app/stylesheets/partials/_base.sass */
+  form input#submit:hover {
+    background: #22a222; }
+/* line 130, ../../app/stylesheets/screen.sass */
+form input#spoil {
+  background: red;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  display: inline-block;
+  color: #fff;
+  padding: 0 0.25em; }
+  /* line 24, ../../app/stylesheets/partials/_base.sass */
+  form input#spoil:hover {
+    background: #ff2222; }
+/* line 132, ../../app/stylesheets/screen.sass */
+form input.disabled {
+  background: #ccc !important; }
+/* line 134, ../../app/stylesheets/screen.sass */
+form label {
+  font-size: 2em; }
 
-/* line 71, ../../app/stylesheets/screen.sass */
-ul#end {
-  min-width: 5em;
-  min-height: 5em; }
+/* line 137, ../../app/stylesheets/screen.sass */
+a.back {
+  font-size: 2em;
+  text-decoration: none; }
+  /* line 140, ../../app/stylesheets/screen.sass */
+  a.back:hover {
+    text-decoration: underline; }

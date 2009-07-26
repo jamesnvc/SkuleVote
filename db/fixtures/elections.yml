@@ -6,3 +6,21 @@ President:
   eligible_year:
   eligible_discipline:
   preferential: 1
+  
+VPFinance:
+  name: EngSoc VP Finance
+  blurb: Explanation Blurb Here
+  start: 
+  end:
+  eligible_year:
+  eligible_discipline:
+  preferential: 1
+  
+Levy:
+  name: FSAE Levy
+  blurb: Explanation Blurb Here
+  start: 
+  end:
+  eligible_year:
+  eligible_discipline:
+  preferential: 0

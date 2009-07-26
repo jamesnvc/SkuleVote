@@ -1,24 +1,33 @@
 %h2= "Voting for: "+@election.name
 %p= @election.blurb
 
-%ul.choices#start
-	- i = 1
-	- @election.choices.each do |choice|
-		%li{:id => 'element_'+choice.id.to_s}
-			=choice.name
-%ul.choices#numbers
-	%li 1
-	%li 2
-	%li 3
-	%li 4
+- form_for :vote, @vote, :url => {:action => "create"} do |f|
+	-if @election.preferential
+		%div#vote.preferential
+			%ul#start
+				- i = 1
+				- @election.choices.each do |choice|
+					%li{:id => 'element_'+choice.id.to_s}
+						=choice.name
+			%ul#numbers
+				- (1..@election.choices.count).each do |i|
+					%li= i
 	
-%ul.choices#end
+			%ul#end
+				%div#drop_message Drop Here
 
-%br{:clear=>"both"}
+			%br{:clear=>"both"}
+	-else
+		%div#vote.regular
+			- @election.choices.each do |choice|
+				= f.radio_button(:result, choice.name, :class=>'radio')
+				= f.label(:result, choice.text)
+				%br
 
-- form_for(@ballot) do |f|
-	= f.submit "Cast Vote"
 
-=link_to "&laquo; Vote Later", "/"
+	= f.submit "Cast Vote", :disabled => true, :id => 'submit', :class => 'disabled' 	
+	= f.submit "Spoil Ballot", :id => 'spoil', :confirm => 'Spoil Ballot: Are you sure?'
+
+=link_to "&laquo; Vote Later", "/", :class => 'back'
 
 

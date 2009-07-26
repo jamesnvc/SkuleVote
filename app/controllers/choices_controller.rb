@@ -1,25 +1,4 @@
 class ChoicesController < ApplicationController
-  # GET /choices
-  # GET /choices.xml
-  def index
-    @choices = Choice.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @choices }
-    end
-  end
-
-  # GET /choices/1
-  # GET /choices/1.xml
-  def show
-    @choice = Choice.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @choice }
-    end
-  end
 
   # GET /choices/new
   # GET /choices/new.xml

@@ -1,0 +1,42 @@
+- form_for :election, election, :url => {:action => (controller.action_name == "new" ? "create" : "update")} do |f|
+	= f.error_messages
+
+	%p
+		= f.label :name 
+		%br
+		= f.text_field :name 
+
+	%p
+		= f.label :blurb 
+		%br
+		= f.text_area :blurb 
+
+	%p
+		= f.label :start 
+		%br
+		= f.datetime_select :start 
+
+	%p
+		= f.label :end 
+		%br
+		= f.datetime_select :end 
+
+	%p
+		= f.label :eligible_year 
+		%br
+		= f.text_field :eligible_year 
+
+	%p
+		= f.label :eligible_discipline 
+		%br
+		= f.text_field :eligible_discipline 
+
+	%p
+		= f.label :preferential 
+		%br
+		= f.check_box :preferential 
+
+	%p
+		= f.submit (controller.action_name = "new" ? 'Create Election' : 'Update Election' )
+		= link_to 'Cancel', :action => 'admin'
+

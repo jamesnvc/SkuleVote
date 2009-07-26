@@ -1,4 +1,9 @@
 function vote_system(){
+	//fakes console.log when firebug isn't on
+	if(typeof console === "undefined"){
+		console = { log: function() { } };
+	}
+
 	if($('start')){
 		Sortable.create('start',{
 			constraint:false

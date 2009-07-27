@@ -7,6 +7,7 @@
 %ul.elections
 	- @active_elections.each do |election|
 		%li
+			= "("+election.ballots.count.to_s+")"
 			=link_to election.name, :action => 'vote', :id => election
 			%span.buttons
 				=link_to "Edit", :action => 'edit', :id => election

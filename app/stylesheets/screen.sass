@@ -7,7 +7,7 @@
 
 body
 	:width 600px
-	:margin 100px auto
+	:margin 25px auto
 	:background #ccc
 
 h1
@@ -21,6 +21,8 @@ h1
 	:line-height 3em
 	a
 		:text-decoration none
+		&#help
+			:cursor help
 
 #content
 	:background white
@@ -69,7 +71,7 @@ ul.elections
 		:margin 0
 		:font-size 1.75em
 		:list-style none
-		
+		:padding-bottom 1.5em
 		li
 			:margin 0 0 0.1em
 			:height 1.5em
@@ -79,31 +81,12 @@ ul.elections
 	ul#start, ul#end
 		:width 40%
 		:position relative
-		li
-			+rounded-corners
-			
-	
-	ul#start
-		:margin-right 10%
-		:min-width 5em
-		:background none
-		:padding-bottom 0.01em
 		
 		li
-			:background #ccc url(/images/icons/bullet_black.png) 95% center no-repeat
-			:cursor url(/images/cursors/grab.cur), default
-	ul#numbers
-		li
-	
-	ul#end
-		+rounded-corners
-		:padding-bottom 1.5em
-		:background #eee
-		li
-			:background #eee url(/images/icons/bullet_green.png) 95% center no-repeat
-			:cursor url(/images/cursors/grabbing.cur), default
+			+rounded-corners
+			:cursor move
 			
-		div#drop_message
+		div
 			:text-align center
 			:color #fff
 			:text-transform uppercase
@@ -114,9 +97,35 @@ ul.elections
 			:height 1.5em
 			:line-height 1.5em
 			+rounded-corners
+			:cursor default
 		
-		&.onDrag div#drop_message
+		&.noMessage
+			:padding-bottom 0.001em
+			div
+				:display none
+		
+		&.onDrag div
 			:background green !important
+			
+	
+	ul#start
+		:margin-right 10%
+		:min-width 5em
+		:background none
+		
+		li
+			:background #ccc url(/images/icons/bullet_black.png) 95% center no-repeat
+			//:cursor url(/images/cursors/grab.cur), default
+	ul#numbers
+		li
+	
+	ul#end
+		+rounded-corners
+		:background #eee
+		li
+			:background #eee url(/images/icons/bullet_green.png) 95% center no-repeat
+			//:cursor url(/images/cursors/grabbing.cur), default
+			
 			
 form 
 	input
@@ -125,18 +134,24 @@ form
 			:font-size 2em
 			:float right
 			:margin 0 0 0.25em 0.5em
+			:cursor pointer
 		&#submit
 			+button(green)
 		&#spoil
-			+button(red)
+			+button(white,red)
 		&.disabled
 			:background #ccc !important
+			:color #fff !important
+			:cursor not-allowed !important
 	label
 		:font-size 2em
 			
 a.back
 	:font-size 2em
+	:margin-top -0.1em
+	+button(white,blue)
 	:text-decoration none
+	:float left
 	&:hover
 		:text-decoration underline
 

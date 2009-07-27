@@ -4,10 +4,15 @@ class ElectionsController < ApplicationController
 
   def index
     @elections = Election.all
+    
+    #temp
+    @ballots = Ballot.all
+    @votes = Vote.all
   end
 
   def vote
     @election = Election.find(params[:id])
+  
     @ballot = Ballot.new
     @vote = Vote.new
   end

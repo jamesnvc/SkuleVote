@@ -1,22 +1,33 @@
 %h2= "Voting for: "+@election.name
 %p= @election.blurb
 
-- form_for :vote, @vote, :url => {:action => "create"} do |f|
+- form_for :vote, @vote, :url => {:controller => "votes", :action => "create"} do |f|
 	-if @election.preferential
 		%div#vote.preferential
-			%ul#start
+			%ul#start.noMessage
 				- i = 1
 				- @election.choices.each do |choice|
 					%li{:id => 'element_'+choice.id.to_s}
 						=choice.name
+				%div#start_drop_message Drop
+				
 			%ul#numbers
 				- (1..@election.choices.count).each do |i|
 					%li= i
 	
 			%ul#end
-				%div#drop_message Drop Here
+				%div#end_drop_message Drop
 
 			%br{:clear=>"both"}
+			
+			-fields_for @election do |election|
+				= election.hidden_field :id
+			
+			- @election.choices.each do |choice|
+				= f.text_field :result, :index => choice.id, :size => 1
+				= f.hidden_field :choice_id, :index => choice.id, :value => choice.id.to_s
+				= f.label choice.name
+				%br
 	-else
 		%div#vote.regular
 			- @election.choices.each do |choice|
@@ -24,10 +35,8 @@
 				= f.label(:result, choice.text)
 				%br
 
-
+	= link_to "&laquo; Vote Later", "/", :class => 'back' 
 	= f.submit "Cast Vote", :disabled => true, :id => 'submit', :class => 'disabled' 	
 	= f.submit "Spoil Ballot", :id => 'spoil', :confirm => 'Spoil Ballot: Are you sure?'
-
-=link_to "&laquo; Vote Later", "/", :class => 'back'
 
 

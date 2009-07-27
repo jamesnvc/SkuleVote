@@ -2,7 +2,6 @@ class Choice < ActiveRecord::Base
 	belongs_to :election
 	
 	
-	
 	def text
 		if self.name == 't'
 			return "Yes"

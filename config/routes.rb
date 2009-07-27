@@ -7,7 +7,8 @@ ActionController::Routing::Routes.draw do |map|
   #ADMIN
   map.connect 'admin', :controller => 'elections', :action => 'admin'
   map.connect 'elections/new', :controller => 'elections', :action => 'new'
-  map.connect 'election/create', :controller => 'elections', :action => 'create'
+  map.connect 'elections/create', :controller => 'elections', :action => 'create'
+  map.connect 'elections/vote', :controller => 'votes', :action => 'create'
   map.connect 'elections/:id/:action', :controller => 'elections'
   
   

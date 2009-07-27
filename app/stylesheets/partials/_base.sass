@@ -14,12 +14,16 @@
 	-moz-border-radius= !width
 	-webkit-border-radius= !width
 	
-=button(!color = green)
-	:background= !color
+=button(!bgcolor = green, !color = white)
+	:background= !bgcolor
 	+rounded-corners(2px)
 	:display inline-block
-	:color #fff
+	:color= !color
 	:padding 0 0.25em
 	
 	&:hover
-		:background= !color + #222
+		@if !bgcolor == white
+			:color= !color - #999
+		@else
+			:background= !bgcolor - #333
+			

@@ -5,9 +5,6 @@ class ElectionsController < ApplicationController
   def index
     @elections = Election.all
     
-    #temp
-    @ballots = Ballot.all
-    @votes = Vote.all
   end
 
   def vote

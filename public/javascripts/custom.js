@@ -4,35 +4,16 @@ function vote_system(){
 		console = { log: function() { } };
 	}
 	
-	function ajax_request(url, data) {
-		var myAjax = new Ajax.Request(url,{
-			method: 'post', 
-			parameters: data, 
-			onComplete: ajax_response
-		});
-	}
-	
-	function ajax_response(originalRequest) {
-		if(!bHasRedirect) {
-			//process originalRequest.responseText;
-		} else {
-			bHasRedirect = false;
-			ajax_request(originalRequest.responseText, "");
-		}
-	}
-	
-	$('submit').observe('click', function(e){
-		/*e.stop();
-		ajax_request("/elections/vote", {
-			election_id: 0,
-			choices: Sortable.serialize('end'),
-			authenticity_token: window._token
-		});*/
-	});
-
-
 	if($('start')){
 		var state = 1;
+		
+		$('submit').observe('click', function(e){
+			var i = 0
+			Sortable.sequence('end').each(function(e){
+				//console.log(e);
+				$('vote_'+e+'_result').value = ++i;	
+			});
+		});
 		
 		Sortable.create('start',{
 			constraint:false,

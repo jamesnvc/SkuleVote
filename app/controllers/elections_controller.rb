@@ -67,6 +67,20 @@ class ElectionsController < ApplicationController
 
   def create
     @election = Election.new(params[:election])
+    
+    #should be a before_save filter
+    case params[:election][:method]
+    	when "preferential"
+    	  @election.preferential = true
+      when "single_choice"
+        params[:election][:max_choices] = 1
+        @election.preferential = false
+      when "multiple_choice"
+        @election.preferential = false	
+      else
+        #raise error  
+    end
+    params[:election].delete(:method)
 
     if @election.save
       flash[:notice] = 'Election was successfully created.'
@@ -78,6 +92,20 @@ class ElectionsController < ApplicationController
 
   def update
     @election = Election.find(params[:id])
+    
+    #should be a before_save filter
+    case params[:election][:method]
+    	when "preferential"
+    	  @election.preferential = true
+      when "single_choice"
+        params[:election][:max_choices] = 1
+        @election.preferential = false
+      when "multiple_choice"
+        @election.preferential = false	
+      else
+        #raise error  
+    end
+    params[:election].delete(:method)
 
     if @election.update_attributes(params[:election])
       flash[:notice] = 'Election was successfully updated.'
@@ -102,5 +130,6 @@ class ElectionsController < ApplicationController
       username == "admin" && password == "pass"
     end
   end
+  
   
 end

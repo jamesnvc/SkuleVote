@@ -9,6 +9,7 @@ class CreateElections < ActiveRecord::Migration
       t.string :eligible_discipline
       t.boolean :preferential
       t.integer :max_choices
+      t.integer :min_choices
       t.boolean :random
 
       t.timestamps

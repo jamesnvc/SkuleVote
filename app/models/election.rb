@@ -18,4 +18,14 @@ class Election < ActiveRecord::Base
 		#if current date falls within start/end date range
 		return Time.now.between?(self.start, self.end)
 	end
+	
+	def method
+	  if self.preferential
+	    return "preferential"
+	  elsif self.max_choices == 1
+	    return "single_choice"
+	  else
+	    return "multiple_choice"
+	  end  
+	end
 end

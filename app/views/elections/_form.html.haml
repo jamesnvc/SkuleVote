@@ -15,11 +15,21 @@
 
 			%li
 				= election.label :start 
-				= election.datetime_select :start 
+				= election.datetime_select :start, :start_year => Time.now.year, :end_year => (Time.now.year + 1)
 
 			%li
 				= election.label :end 
-				= election.datetime_select :end 
+				= election.datetime_select :end, :start_year => Time.now.year, :end_year => (Time.now.year + 1), :default => 1.week.from_now
+
+			%li
+				= election.label :method, "Type"
+				%fieldset
+					= election.radio_button :method, :preferential
+					= election.label :method_preferential, "Preferential"
+					= election.radio_button :method, :single_choice
+					= election.label :method_single_choice, "Single Choice"
+					= election.radio_button :method, :multiple_choice
+					= election.label :method_multiple_choice, "Multiple Choice"
 
 			%li
 				= election.label :eligible_year 
@@ -29,25 +39,11 @@
 				= election.label :eligible_discipline 
 				= election.text_field :eligible_discipline 
 			
-			%li
-				= election.label :random 
-				= election.check_box :random 
-
-			%li
-				= election.label :preferential 
-				= election.check_box :preferential 
-	
-			%li
-				=election.label :max_choices
-				=election.text_field :max_choices, :size => 1
+			
+				
+			
 	%fieldset
 		%legend Choices
-		-#
-			%ol
-				-election.fields_for :choices do |choice|
-					%li
-						= choice.label :name
-						= choice.text_field :name
 		
 		%ol#choices
 			-@election.choices.each_with_index do |choice, index|
@@ -55,7 +51,20 @@
 
 		= render :partial => 'add_choice_link', :locals  => {:index => @election.choices.size }
 	
+		%ol
+			%li
+				=election.label :min_choices
+				=election.text_field :min_choices, :size => 1	
+			%li
+				=election.label :max_choices
+				=election.text_field :max_choices, :size => 1
+				
+			%li
+				= election.label :random, "Randomize Order"
+				= election.check_box :random 
+				
 	%p
 		= election.submit (controller.action_name == "new" ? 'Create Election' : 'Update Election' )
 		= link_to 'Cancel', :action => 'admin'
+		
 

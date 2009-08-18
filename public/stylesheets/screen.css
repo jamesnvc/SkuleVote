@@ -452,17 +452,17 @@ form fieldset {
   form fieldset legend {
     font-size: 1.5em;
     padding: 0 0.25em; }
-/* line 152, ../../app/stylesheets/screen.sass */
+/* line 151, ../../app/stylesheets/screen.sass */
 form input {
   min-height: 1em; }
-  /* line 153, ../../app/stylesheets/screen.sass */
+  /* line 152, ../../app/stylesheets/screen.sass */
   form input#submit, form input#spoil {
     border: none;
     font-size: 2em;
     float: right;
     margin: 0 0 0.25em 0.5em;
     cursor: pointer; }
-  /* line 159, ../../app/stylesheets/screen.sass */
+  /* line 158, ../../app/stylesheets/screen.sass */
   form input#submit {
     background: green;
     -moz-border-radius: 2px;
@@ -474,7 +474,7 @@ form input {
     /* line 25, ../../app/stylesheets/partials/_base.sass */
     form input#submit:hover {
       background: #004d00; }
-  /* line 161, ../../app/stylesheets/screen.sass */
+  /* line 160, ../../app/stylesheets/screen.sass */
   form input#spoil {
     background: white;
     -moz-border-radius: 2px;
@@ -486,36 +486,51 @@ form input {
     /* line 25, ../../app/stylesheets/partials/_base.sass */
     form input#spoil:hover {
       color: #660000; }
-  /* line 163, ../../app/stylesheets/screen.sass */
+  /* line 162, ../../app/stylesheets/screen.sass */
   form input.disabled {
     background: #ccc !important;
     color: #fff !important;
     cursor: not-allowed !important; }
-/* line 168, ../../app/stylesheets/screen.sass */
+/* line 167, ../../app/stylesheets/screen.sass */
 form label {
   font-size: 2em; }
 
 /* line 172, ../../app/stylesheets/screen.sass */
-.new form label,
-.edit form label {
+.new form fieldset label,
+.edit form fieldset label {
   font-size: 1.25em;
   width: 25%;
   padding: 0.1em;
   display: block;
   float: left; }
   /* line 178, ../../app/stylesheets/screen.sass */
-  .new form label.remove,
-  .edit form label.remove {
+  .new form fieldset label.remove,
+  .edit form fieldset label.remove {
     float: none;
     display: inline;
     width: 5%;
     margin: 0 0 0 1em; }
   /* line 183, ../../app/stylesheets/screen.sass */
-  .new form label em,
-  .edit form label em {
+  .new form fieldset label em,
+  .edit form fieldset label em {
     color: red; }
-
 /* line 186, ../../app/stylesheets/screen.sass */
+.new form fieldset fieldset,
+.edit form fieldset fieldset {
+  border: none;
+  padding: 0; }
+  /* line 189, ../../app/stylesheets/screen.sass */
+  .new form fieldset fieldset input,
+  .edit form fieldset fieldset input {
+    float: left;
+    clear: left; }
+/* line 194, ../../app/stylesheets/screen.sass */
+.new form fieldset #add_choice_link,
+.edit form fieldset #add_choice_link {
+  margin: 0 0 1.5em 25%;
+  padding: 0.5em; }
+
+/* line 199, ../../app/stylesheets/screen.sass */
 a.back {
   font-size: 2em;
   margin-top: -0.1em;
@@ -531,14 +546,14 @@ a.back {
   /* line 25, ../../app/stylesheets/partials/_base.sass */
   a.back:hover {
     color: #000066; }
-  /* line 192, ../../app/stylesheets/screen.sass */
+  /* line 205, ../../app/stylesheets/screen.sass */
   a.back:hover {
     text-decoration: underline; }
 
-/* line 196, ../../app/stylesheets/screen.sass */
+/* line 209, ../../app/stylesheets/screen.sass */
 .admin ul.elections {
   font-size: 1.5em; }
-/* line 198, ../../app/stylesheets/screen.sass */
+/* line 211, ../../app/stylesheets/screen.sass */
 .admin a.new {
   background: green;
   -moz-border-radius: 2px;
@@ -555,6 +570,6 @@ a.back {
   /* line 25, ../../app/stylesheets/partials/_base.sass */
   .admin a.new:hover {
     background: #004d00; }
-/* line 205, ../../app/stylesheets/screen.sass */
+/* line 218, ../../app/stylesheets/screen.sass */
 .admin a.destroy {
   background: red !important; }

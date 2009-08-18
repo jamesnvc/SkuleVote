@@ -148,7 +148,6 @@ form
 			:font-size 1.5em
 			:padding 0 0.25em
 			
-			
 	input
 		&#submit, &#spoil
 			:border none
@@ -169,19 +168,33 @@ form
 		:font-size 2em
 .new form,
 .edit form
-	label
-		:font-size 1.25em
-		:width 25%
-		:padding 0.1em
-		:display block
-		:float left
-		&.remove
-			:float none
-			:display inline
-			:width 5%
-			:margin 0 0 0 1em
-		em
-			:color red
+	fieldset
+		label
+			:font-size 1.25em
+			:width 25%
+			:padding 0.1em
+			:display block
+			:float left
+			&.remove
+				:float none
+				:display inline
+				:width 5%
+				:margin 0 0 0 1em
+			em
+				:color red
+		
+		fieldset
+			:border none
+			:padding 0
+			input
+				:float left
+				:clear left
+			label
+			
+		#add_choice_link
+			:margin 0 0 1.5em 25%
+			:padding 0.5em
+				
 			
 a.back
 	:font-size 2em

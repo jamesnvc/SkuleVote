@@ -24,13 +24,13 @@
 				= f.hidden_field :result, :index => choice.id, :size => 1
 				= f.hidden_field :choice_id, :index => choice.id, :value => choice.id.to_s
 				
-	-elsif @election.max_choices == 1
+	-elsif(@election.max_choices == 1)
 		%div#vote.regular
 			- @choices.each do |choice|
 				= radio_button(:vote_single, choice.id, choice.id, :class => 'box', :name => 'vote_single[choice_id]')
 				= label(:vote_single, "#{choice.id}_#{choice.id}", choice.text)
 				%br
-	-else 
+	-else
 		%div#vote.regular
 			- @choices.each do |choice|
 				= f.check_box(:result, :index => choice.id, :class => 'box')

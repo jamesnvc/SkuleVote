@@ -3,6 +3,6 @@
 %h3 Votes
 %ul
 	- @election.votes.each do |vote|
-		-if vote.result
+		-if vote.result && vote.choice
 			%li= vote.choice.name+" : "+vote.result.to_s
 

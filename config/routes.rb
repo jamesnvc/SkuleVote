@@ -9,6 +9,8 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'elections/new', :controller => 'elections', :action => 'new'
   map.connect 'elections/create', :controller => 'elections', :action => 'create'
   map.connect 'elections/vote', :controller => 'votes', :action => 'create'
+  map.connect 'election/add_choice', :controller => 'elections', :action => 'add_choice'
+  
   map.connect 'elections/:id/:action', :controller => 'elections'
   
   

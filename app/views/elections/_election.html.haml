@@ -1,0 +1,6 @@
+=link_to election.name, :action => 'vote', :id => election
+%span.buttons
+	=link_to "Edit", :action => 'edit', :id => election
+	=link_to "Results", :action => 'results', :id => election
+	=link_to "Votes (#{election.ballots.count.to_s})", :action => 'votes', :id => election
+	=link_to "X", {:action => 'destroy', :id => election}, :confirm => "Destroy: Are you Sure?", :class => 'destroy'

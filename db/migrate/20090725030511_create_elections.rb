@@ -8,6 +8,8 @@ class CreateElections < ActiveRecord::Migration
       t.integer :eligible_year
       t.string :eligible_discipline
       t.boolean :preferential
+      t.integer :max_choices
+      t.boolean :random
 
       t.timestamps
     end

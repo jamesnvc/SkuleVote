@@ -80,7 +80,7 @@ function vote_system(){
 		});
 	} 
 	else {
-		$$('.radio').each(function(e){
+		$$('.box').each(function(e){
 			e.observe('click', function(){
 				$('submit').removeClassName('disabled').enable();
 				//TO-DO: add "remove this observer"

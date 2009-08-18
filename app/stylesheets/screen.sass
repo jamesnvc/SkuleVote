@@ -10,10 +10,12 @@ body
 	:margin 25px auto
 	:background #ccc
 
-h1
-	:float left
-	:margin 0
-	:color #fff
+h1 
+	a
+		:float left
+		:margin 0
+		:color #fff !important
+		:text-decoration none !important
 	
 #menu
 	+horizontal-list
@@ -29,6 +31,7 @@ h1
 	+rounded-corners
 	:padding 0.5em 1em
 	:clear both
+	:position relative
 	
 	h2
 	
@@ -62,7 +65,7 @@ ul.elections
 				
 	
 #vote
-	:width 90%
+	:width 95%
 	:margin 1em auto 3em
 	
 	ul
@@ -77,9 +80,11 @@ ul.elections
 			:height 1.5em
 			:line-height 1.5em
 			:padding 0 0.25em
+			:white-space nowrap
+			:overflow hidden
 		
 	ul#start, ul#end
-		:width 40%
+		:width 45%
 		:position relative
 		
 		li
@@ -109,7 +114,7 @@ ul.elections
 			
 	
 	ul#start
-		:margin-right 10%
+		:margin-right 5%
 		:min-width 5em
 		:background none
 		
@@ -128,6 +133,22 @@ ul.elections
 			
 			
 form 
+	ol
+		:margin 0
+		:list-style none
+		li
+			:margin 0.5em 0
+			:min-height 2em
+	fieldset
+		:border 1px solid gray
+		:margin 1em 0
+		:padding 0 1em 1em
+		+rounded-corners
+		legend
+			:font-size 1.5em
+			:padding 0 0.25em
+			
+			
 	input
 		&#submit, &#spoil
 			:border none
@@ -143,8 +164,24 @@ form
 			:background #ccc !important
 			:color #fff !important
 			:cursor not-allowed !important
+		:min-height 1em
 	label
 		:font-size 2em
+.new form,
+.edit form
+	label
+		:font-size 1.25em
+		:width 25%
+		:padding 0.1em
+		:display block
+		:float left
+		&.remove
+			:float none
+			:display inline
+			:width 5%
+			:margin 0 0 0 1em
+		em
+			:color red
 			
 a.back
 	:font-size 2em
@@ -154,4 +191,17 @@ a.back
 	:float left
 	&:hover
 		:text-decoration underline
+		
+.admin
+	ul.elections
+		:font-size 1.5em
+	a.new
+		+button
+		:position absolute
+		:top 0
+		:right 0
+		:margin 1em
+		:font-size 1.5em
+	a.destroy
+		:background red !important
 

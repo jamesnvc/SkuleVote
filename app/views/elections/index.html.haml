@@ -1,10 +1,11 @@
 %h2 Available Elections
 
 - @elections.each do |election|
-	%ul.elections
-		%li
-			=link_to election.name, :action => 'vote', :id => election
-			=link_to "Vote Now", {:action => 'vote', :id => election }, :class => 'button'
+	-if election.active? #should be done via SQL in controller
+		%ul.elections
+			%li
+				=link_to election.name, :action => 'vote', :id => election
+				=link_to "Vote Now", {:action => 'vote', :id => election }, :class => 'button'
 
 -# TO DO:
 	for active elections user has already voted in,

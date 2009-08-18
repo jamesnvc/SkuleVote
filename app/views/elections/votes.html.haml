@@ -1,14 +1,8 @@
 %h2= "Votes for: "+@election.name
-%h3 Ballots
-%ul
-	%li election.id : student.id 
-	- @election.ballots.each do |ballot|
-		%li
-			= ballot.election.id.to_s+" : "+ballot.sp_id.to_s
+%p= @election.ballots.size.to_s+" ballots cast."
 %h3 Votes
 %ul
-	%li election.id : choice.id : result
 	- @election.votes.each do |vote|
-		%li
-			= ""+vote.election.id.to_s+" : "+vote.choice_id.to_s+" : "+vote.result.to_s
+		-if vote.result
+			%li= vote.choice.name+" : "+vote.result.to_s
 

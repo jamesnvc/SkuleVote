@@ -4,19 +4,25 @@ class ElectionsController < ApplicationController
 
   def index
     @elections = Election.all
+    # should include .active conditional here, or via sql
     
   end
 
   def vote
     @election = Election.find(params[:id])
-  
+    
+    if @election.random
+    	@choices = @election.choices.sort_by {rand}
+    else
+      @choices = @election.choices
+    end
+    
     @ballot = Ballot.new
     @vote = Vote.new
   end
   
   def admin
-  	@active_elections = Election.all
-  	@inactive_elections = Election.all
+  	@elections = Election.all
   end
   
   def help
@@ -25,14 +31,28 @@ class ElectionsController < ApplicationController
 
   def results
   	@election = Election.find(params[:id])
+  	
+  	if @election.preferential
+  	  @result = "Winner is ... coming soon"
+  	else
+  	  @result = "Winner is ... coming soon"
+  	end
   end
   
   def votes
   	@election = Election.find(params[:id])
+  	
+  	@spoiled = @election.votes.find(:all, :conditions => {:choice_id => 0 })
+  end
+
+  def add_choice
+  	@choice = Choice.new
   end
 
   def new
     @election = Election.new
+    @choice = Choice.new
+    @election.choices << @choice
   end
 
   def edit

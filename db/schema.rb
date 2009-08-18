@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(:version => 20090725030616) do
     t.integer  "eligible_year"
     t.string   "eligible_discipline"
     t.boolean  "preferential"
+    t.integer  "max_choices"
+    t.boolean  "random"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,0 +1,8 @@
+-fields_for "election[choices_attributes][#{index}]", choice do |choice|
+	%li
+		= choice.label :name
+		= choice.text_field :name
+		= choice.hidden_field :id
+		- unless choice.object.new_record?
+			=choice.label :_delete, "Remove:", :class => 'remove'
+			=choice.check_box :_delete

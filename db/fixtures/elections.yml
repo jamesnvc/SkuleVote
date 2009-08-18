@@ -1,26 +1,42 @@
 President:
   name: EngSoc President
   blurb: Explanation Blurb Here
-  start: 
-  end:
+  start: <%= 1.days.ago %>
+  end: <%= 4.days.from_now %>
   eligible_year:
   eligible_discipline:
   preferential: 1
+  random: 1
   
 VPFinance:
   name: EngSoc VP Finance
   blurb: Explanation Blurb Here
-  start: 
-  end:
+  start: <%= 2.hours.ago %> 
+  end: <%= 1.hours.ago %>
   eligible_year:
   eligible_discipline:
   preferential: 1
+  max_choices: 3
+  random: 1
   
 Levy:
   name: FSAE Levy
   blurb: Explanation Blurb Here
-  start: 
-  end:
+  start: <%= 2.days.ago %>
+  end: <%= 1.days.from_now %>
   eligible_year:
   eligible_discipline:
   preferential: 0
+  max_choices: 1
+  random: 0
+  
+MultipleChoice:
+  name: Multiple Choice
+  blurb: Choose as many as you want.
+  start: <%= 5.days.ago %>
+  end: <%= 10.days.from_now %>
+  eligible_year:
+  eligible_discipline:
+  preferential: 0
+  max_choices: 2
+  random: 1

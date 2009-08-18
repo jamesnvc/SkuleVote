@@ -1,27 +1,19 @@
 %h2 Admin
 
-=link_to "New Election", :action => 'new'
+=link_to "New Election", {:action => 'new'}, :class => 'new'
 
 %h2 Active Elections
 
 %ul.elections
-	- @active_elections.each do |election|
-		%li
-			= "("+election.ballots.count.to_s+")"
-			=link_to election.name, :action => 'vote', :id => election
-			%span.buttons
-				=link_to "Edit", :action => 'edit', :id => election
-				=link_to "Results", :action => 'results', :id => election
-				=link_to "Votes", :action => 'votes', :id => election
-				=link_to "X", {:action => 'destroy', :id => election}, :confirm => "Destroy: Are you Sure?"
-	%br{:clear => 'both'}
+	- @elections.each do |election|
+		-if election.active?
+			%li= render :partial => 'election', :locals => {:election => election}
+			
+%br{:clear => 'both'}
 
 %h2 Inactive Elections
 
 %ul.elections
-	- @inactive_elections.each do |election|
-		%li
-			=link_to election.name, "#"
-			%span.buttons
-				=link_to "Results", :action => 'results', :id => election
-				=link_to "Votes", :action => 'votes', :id => election
+	- @elections.each do |election|
+		-unless election.active?
+			%li= render :partial => 'election', :locals => {:election => election}

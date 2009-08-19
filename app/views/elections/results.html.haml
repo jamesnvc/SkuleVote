@@ -23,7 +23,7 @@
 		%td
 			-if @election.total > 0
 				- percent = (@election.spoils.size.to_f * 100 / @election.total).round
-				.bar(style="width: #{percent}%")
+				.bar(style="width: #{percent}%" class='spoil')
 					= "&nbsp;"+percent.to_s+"%"
 			
 		

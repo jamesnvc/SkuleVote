@@ -7,7 +7,7 @@
 %ul.elections
 	- @elections.each do |election|
 		-if election.active?
-			%li= render :partial => 'election', :locals => {:election => election}
+			%li= render :partial => 'partials/election', :locals => {:election => election}
 			
 %br{:clear => 'both'}
 
@@ -16,4 +16,4 @@
 %ul.elections
 	- @elections.each do |election|
 		-unless election.active?
-			%li= render :partial => 'election', :locals => {:election => election}
+			%li= render :partial => 'partials/election', :locals => {:election => election}

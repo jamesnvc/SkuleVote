@@ -1,0 +1,114 @@
+V1:
+  election: President
+  choice: Pres1
+  ballot: B1
+  result: 1
+  
+V2:
+  election: President
+  choice: Pres2
+  ballot: B1
+  result: 2
+  
+V3:
+  election: President
+  choice: Pres3
+  ballot: B1
+  result: 3
+  
+V4:
+  election: President
+  choice: Pres4
+  ballot: B2
+  result: 1
+  
+V5:
+  election: President
+  choice: Pres1
+  ballot: B2
+  result: 2
+  
+V6:
+  election: President
+  choice: Pres2
+  ballot: B2
+  result: 3
+  
+V7:
+  election: President
+  choice_id: 0
+  ballot: B3
+  result: 1
+
+  
+V9:
+  election: Levy
+  choice: Levy2
+  ballot: B4
+  result: 1
+  
+V10:
+  election: Levy
+  choice: Levy1
+  ballot: B5
+  result: 1
+  
+V11:
+  election: Levy
+  choice_id: 0
+  ballot: B6
+  result: 1
+  
+V12:
+  election: MultipleChoice
+  choice: MC1
+  ballot: B7
+  result: 1
+  
+V13:
+  election: MultipleChoice
+  choice: MC2
+  ballot: B7
+  result: 0
+  
+V14:
+  election: MultipleChoice
+  choice: MC3
+  ballot: B7
+  result: 0
+  
+V15:
+  election: MultipleChoice
+  choice: MC4
+  ballot: B7
+  result: 0
+  
+V16:
+  election: MultipleChoice
+  choice: MC1
+  ballot: B8
+  result: 1
+  
+V17:
+  election: MultipleChoice
+  choice: MC2
+  ballot: B8
+  result: 1
+  
+V18:
+  election: MultipleChoice
+  choice: MC3
+  ballot: B8
+  result: 1
+  
+V19:
+  election: MultipleChoice
+  choice: MC4
+  ballot: B8
+  result: 1
+  
+V20:
+  election: MultipleChoice
+  choice_id: 0
+  ballot: B10
+  result: 1

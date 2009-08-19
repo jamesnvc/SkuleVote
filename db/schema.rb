@@ -14,14 +14,11 @@ ActiveRecord::Schema.define(:version => 20090819003055) do
   create_table "ballots", :force => true do |t|
     t.integer  "election_id"
     t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "choices", :force => true do |t|
     t.integer  "election_id"
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "elections", :force => true do |t|

@@ -2,7 +2,7 @@
 %p= @election.blurb
 
 - form_for :vote, @vote, :url => {:controller => "votes", :action => "create"} do |f|
-	=render :partial => @election.method, :locals => {:f => f, :election => @election, :choices => @choices}
+	=render :partial => "partials/"+@election.method, :locals => {:f => f, :election => @election, :choices => @choices}
 	
 	-fields_for @election do |election|
 		= election.hidden_field :id

@@ -6,8 +6,7 @@
 		%ol
 			%li
 				= election.label :name, "Election Name<em>*</em>"
-				= election.text_field :name, :size => '25'
-				
+				= election.text_field :name, :size => '25'		
 
 			%li
 				= election.label :blurb 
@@ -38,8 +37,6 @@
 			%li
 				= election.label :eligible_discipline 
 				= election.text_field :eligible_discipline 
-			
-			
 				
 			
 	%fieldset
@@ -47,9 +44,9 @@
 		
 		%ol#choices
 			-@election.choices.each_with_index do |choice, index|
-				= render :partial => 'choice', :locals => {:election => election, :choice => choice, :index => index}
+				= render :partial => 'partials/choice', :locals => {:election => election, :choice => choice, :index => index}
 
-		= render :partial => 'add_choice_link', :locals  => {:index => @election.choices.size }
+		= render :partial => 'partials/add_choice_link', :locals  => {:index => @election.choices.size }
 	
 		%ol
 			%li

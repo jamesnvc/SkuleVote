@@ -581,3 +581,6 @@ a.back {
   color: white;
   -moz-border-radius: 0 2px 2px 0;
   -webkit-border-radius: 0 2px 2px 0; }
+  /* line 227, ../../app/stylesheets/screen.sass */
+  .results .bar.spoil {
+    background: red; }

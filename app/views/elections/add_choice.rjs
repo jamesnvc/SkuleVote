@@ -1,2 +1,0 @@
-page.replace :add_choice_link, :partial => 'add_choice_link', :locals => {:index => (params[:index].to_i + 1)}
-page.insert_html :bottom, :choices, :partial => 'choice', :locals => { :choice => @choice, :index => params[:index] }

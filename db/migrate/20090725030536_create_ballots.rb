@@ -3,7 +3,7 @@ class CreateBallots < ActiveRecord::Migration
     create_table :ballots do |t|
       t.integer :election_id
 
-      t.timestamps
+      t.datetime :created_at
     end
   end
 

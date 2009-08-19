@@ -23,4 +23,9 @@ class Choice < ActiveRecord::Base
 			return self.name
 		end
 	end
+	
+	def total
+		#return Vote.calculate(:sum, :result, :conditions => "choice_id == #{self.id}")
+		return self.votes.sum(:result)
+	end
 end

@@ -573,3 +573,11 @@ a.back {
 /* line 218, ../../app/stylesheets/screen.sass */
 .admin a.destroy {
   background: red !important; }
+
+/* line 222, ../../app/stylesheets/screen.sass */
+.results .bar {
+  background: green;
+  float: left;
+  color: white;
+  -moz-border-radius: 0 2px 2px 0;
+  -webkit-border-radius: 0 2px 2px 0; }

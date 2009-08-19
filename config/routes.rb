@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :voters
+
 
   #USER
   map.root :controller => "elections"

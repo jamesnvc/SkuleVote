@@ -9,10 +9,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090725030616) do
+ActiveRecord::Schema.define(:version => 20090819003055) do
 
   create_table "ballots", :force => true do |t|
-    t.integer  "sp_id"
     t.integer  "election_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -40,12 +39,19 @@ ActiveRecord::Schema.define(:version => 20090725030616) do
     t.datetime "updated_at"
   end
 
+  create_table "elections_voters", :id => false, :force => true do |t|
+    t.integer "election_id"
+    t.integer "voter_id"
+  end
+
+  create_table "voters", :force => true do |t|
+  end
+
   create_table "votes", :force => true do |t|
-    t.integer  "election_id"
-    t.integer  "choice_id"
-    t.integer  "result"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "election_id"
+    t.integer "choice_id"
+    t.integer "ballot_id"
+    t.integer "result"
   end
 
 end

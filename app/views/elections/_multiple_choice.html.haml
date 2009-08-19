@@ -1,0 +1,7 @@
+%div#vote.regular
+	- @choices.each do |choice|
+		= f.check_box(:result, :index => choice.id, :class => 'box')
+		= f.label(:result, choice.name, :index => choice.id)
+		= f.hidden_field :choice_id, :index => choice.id, :value => choice.id.to_s
+		%br
+

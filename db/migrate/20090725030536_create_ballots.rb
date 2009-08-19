@@ -1,7 +1,6 @@
 class CreateBallots < ActiveRecord::Migration
   def self.up
     create_table :ballots do |t|
-      t.integer :sp_id
       t.integer :election_id
 
       t.timestamps

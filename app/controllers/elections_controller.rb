@@ -30,22 +30,10 @@ class ElectionsController < ApplicationController
   end
 
   def results
-  	@election = Election.find(params[:id])
-  	
-  	if @election.preferential
-  	  @result = "Winner is ... coming soon"
-  	else
-  	  @result = "Winner is ... coming soon"
-  	  #@results = {}
-        #@election.choices.each do |choice|
-  	  #  @results[choice] = Vote.calculate(:sum, :result, :conditions => "choice_id == #{choice.id}")
- 	  #end
-  	end
-  	
-  	
+  	@election = Election.find(params[:id])  	
   end
   
-  def votes
+  def ballots
   	@election = Election.find(params[:id])
   	
   	@spoiled = @election.votes.find(:all, :conditions => {:choice_id => 0 })

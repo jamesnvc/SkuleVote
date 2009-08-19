@@ -2,42 +2,8 @@
 %p= @election.blurb
 
 - form_for :vote, @vote, :url => {:controller => "votes", :action => "create"} do |f|
-	-if @election.preferential
-		%div#vote.preferential
-			%ul#start.noMessage
-				- i = 1
-				- @choices.each do |choice|
-					%li{:id => 'element_'+choice.id.to_s}
-						=choice.name
-				%div#start_drop_message Drop
-				
-			%ul#numbers
-				- (1..@election.choices.count).each do |i|
-					%li= i
+	=render :partial => @election.method, :locals => {:f => f, :election => @election, :choices => @choices}
 	
-			%ul#end
-				%div#end_drop_message Drop
-
-			%br{:clear=>"both"}
-			
-			- @choices.each do |choice|
-				= f.hidden_field :result, :index => choice.id, :size => 1
-				= f.hidden_field :choice_id, :index => choice.id, :value => choice.id.to_s
-				
-	-elsif(@election.max_choices == 1)
-		%div#vote.regular
-			- @choices.each do |choice|
-				= radio_button(:vote_single, choice.id, choice.id, :class => 'box', :name => 'vote_single[choice_id]')
-				= label(:vote_single, "#{choice.id}_#{choice.id}", choice.text)
-				%br
-	-else
-		%div#vote.regular
-			- @choices.each do |choice|
-				= f.check_box(:result, :index => choice.id, :class => 'box')
-				= f.label(:result, choice.name, :index => choice.id)
-				= f.hidden_field :choice_id, :index => choice.id, :value => choice.id.to_s
-				%br
-			
 	-fields_for @election do |election|
 		= election.hidden_field :id
 

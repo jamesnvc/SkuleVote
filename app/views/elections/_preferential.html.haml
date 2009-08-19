@@ -1,0 +1,22 @@
+%div#vote.preferential
+	%ul#start.noMessage
+		- i = 1
+		- @choices.each do |choice|
+			%li{:id => 'element_'+choice.id.to_s}
+				=choice.name
+		%div#start_drop_message Drop
+		
+	%ul#numbers
+		- (1..@election.choices.count).each do |i|
+			%li= i
+
+	%ul#end
+		%div#end_drop_message Drop
+
+	%br(style="clear: both")
+	
+	- @choices.each do |choice|
+		= f.hidden_field :result, :index => choice.id, :size => 1
+		= f.hidden_field :choice_id, :index => choice.id, :value => choice.id.to_s
+				
+	

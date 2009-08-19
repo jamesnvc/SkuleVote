@@ -3,8 +3,6 @@ class CreateChoices < ActiveRecord::Migration
     create_table :choices do |t|
       t.integer :election_id
       t.string :name
-
-      t.timestamps
     end
   end
 

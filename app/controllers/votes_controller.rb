@@ -3,17 +3,21 @@ class VotesController < ApplicationController
   # POST /votes.xml
   def create
     @election = Election.find(params[:election][:id])
-    @election.ballots << Ballot.new(:sp_id => 1234)
+    
+    @ballot = Ballot.new
+    @election.ballots << @ballot
+    
     
     if params[:commit] == "Spoil Ballot"
       
-      @election.votes << Vote.new(:choice_id => 0, :result => 1)
+      @ballot.votes << Vote.new(:choice_id => 0, :result => 1, :election_id => @election.id)
         
     elsif    
-	    if params[:vote_single] #Radio Button single choice elections
-	    	@election.votes << Vote.new(:choice_id => params[:vote_single][:choice_id], :result => 1)
+	    if @election.method == "single_choice"
+	      @ballot.votes << Vote.new(:choice_id => params[:vote_single][:choice_id], :result => 1, :election_id => @election.id)
 	    else #preferential and multiple choice elections
 	    	@votes = @election.votes.build params[:vote].values
+	      @votes = @ballot.votes.build params[:vote].values
 	    end
     end
     

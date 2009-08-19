@@ -3,9 +3,8 @@ class CreateVotes < ActiveRecord::Migration
     create_table :votes do |t|
       t.integer :election_id
       t.integer :choice_id
+      t.integer :ballot_id
       t.integer :result
-
-      t.timestamps
     end
   end
 

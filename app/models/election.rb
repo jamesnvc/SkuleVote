@@ -2,6 +2,7 @@ class Election < ActiveRecord::Base
 	has_many :choices, :dependent => :destroy
 	has_many :votes, :dependent => :destroy
 	has_many :ballots, :dependent => :destroy
+	has_and_belongs_to_many :voters
 	
 	validates_presence_of :name
 	

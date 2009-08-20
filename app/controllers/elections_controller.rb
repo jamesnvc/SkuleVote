@@ -54,10 +54,13 @@ class ElectionsController < ApplicationController
   end
 
   def create
+    @method = params[:election][:method]
+    params[:election].delete(:method)
+    
     @election = Election.new(params[:election])
     
     #should be a before_save filter
-    case params[:election][:method]
+    case @method
     	when "preferential"
     	  @election.preferential = true
       when "single_choice"
@@ -67,8 +70,7 @@ class ElectionsController < ApplicationController
         @election.preferential = false	
       else
         #raise error  
-    end
-    params[:election].delete(:method)
+    end if false
 
     if @election.save
       flash[:notice] = 'Election was successfully created.'
@@ -79,10 +81,13 @@ class ElectionsController < ApplicationController
   end
 
   def update
+    @method = params[:election][:method]
+    params[:election].delete(:method)
+  
     @election = Election.find(params[:id])
     
     #should be a before_save filter
-    case params[:election][:method]
+    case @method
     	when "preferential"
     	  @election.preferential = true
       when "single_choice"
@@ -93,7 +98,6 @@ class ElectionsController < ApplicationController
       else
         #raise error  
     end
-    params[:election].delete(:method)
 
     if @election.update_attributes(params[:election])
       flash[:notice] = 'Election was successfully updated.'

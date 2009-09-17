@@ -1,46 +1,86 @@
 %h2= "Results for: "+@election.name
 
-%table
-	%tr
-		%th Choice
-		%th Total
-		%th(width="50%") Graph
-	
-	-#@winner = nil
-	-@election.choices.each do |choice|
+-if @election.preferential		
+	-win_id = calculate_winner_preferential(@election)
+	-if win_id == :spoiled
+		Election was spoiled
+		-@winner = :spoiled
+	-else
+		-@winner = @election.choices.find(win_id)
+	-first_ballots = {}
+	-first_ballots.default = 0
+	-@election.ballots.each do |b|
+		-b.votes.each do |v|
+			-if v.result == 1
+				-first_ballots[v.choice_id] += 1
+	-second_ballots = {}
+	-second_ballots.default = 0
+	-@election.ballots.each do |b|
+		-b.votes.each do |v|
+			-if v.result == 2
+				-second_ballots[v.choice_id] += 1
+	-third_ballots = {}
+	-third_ballots.default = 0
+	-@election.ballots.each do |b|
+		-b.votes.each do |v|
+			-if v.result == 3
+				-third_ballots[v.choice_id] += 1
+	-fourth_ballots = {}
+	-fourth_ballots.default = 0
+	-@election.ballots.each do |b|
+		-b.votes.each do |v|
+			-if v.result == 4
+				-fourth_ballots[v.choice_id] += 1
+	%table
 		%tr
-			%td=choice.text
-			%td=choice.total
+			%th Choice
+			%th Total First Choices
+			%th Total Second Choices
+			%th Total Third Choices
+			%th Total Fourth Choices
+		-@election.choices.each do |choice|
+			%tr
+				%td=choice.text
+				%td=first_ballots[choice.id].to_s + " of " + first_ballots.values.sum.to_s
+				%td=second_ballots[choice.id].to_s + " of " + second_ballots.values.sum.to_s
+				%td=third_ballots[choice.id].to_s + " of " + third_ballots.values.sum.to_s
+				%td=fourth[choice.id].to_s + " of " + fourth.values.sum.to_s
+-else        
+	%table
+		%tr
+			%th Choice
+			%th Total
+			%th(width="50%") Graph
+		
+		-#@winner = nil
+		-@election.choices.each do |choice|
+			%tr
+				%td=choice.text
+				%td=choice.total
+				%td
+					-if @election.total > 0
+						- percent = (choice.total.to_f * 100 / @election.total).round
+						.bar(style="width: #{percent}%")
+							= "&nbsp;"+percent.to_s+"%"
+				-#@winner = choice if (!@winner || choice.total > @winner.total)
+		%tr
+			%td Spoiled Ballots
+			%td= @election.spoils.size
 			%td
 				-if @election.total > 0
-					- percent = (choice.total.to_f * 100 / @election.total).round
-					.bar(style="width: #{percent}%")
+					- percent = (@election.spoils.size.to_f * 100 / @election.total).round
+					.bar(style="width: #{percent}%" class='spoil')
 						= "&nbsp;"+percent.to_s+"%"
-			-#@winner = choice if (!@winner || choice.total > @winner.total)
-	%tr
-		%td Spoiled Ballots
-		%td= @election.spoils.size
-		%td
-			-if @election.total > 0
-				- percent = (@election.spoils.size.to_f * 100 / @election.total).round
-				.bar(style="width: #{percent}%" class='spoil')
-					= "&nbsp;"+percent.to_s+"%"
+				
 			
-		
-	%tr
-		%th Total
-		%th= @election.total
-		%th
+		%tr
+			%th Total
+			%th= @election.total
+			%th
 		 
--if @election.preferential		
-	- win_id = calculate_winner_preferential(@election)
-	- if win_id == :spoiled
-		Election was spoiled
-		- @winner = :spoiled
-	- else
-		- @winner = @election.choices.find(win_id)
-        
 -if @winner == :spoiled
 	Election was spoiled
--else	
+-elsif @winner.class == Array
+	%h2= "Tie; Winners are " + @winner.map {|w| w.text }
+-else    
 	%h2= "Winner is: "+ @winner.text

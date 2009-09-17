@@ -1,44 +1,46 @@
 %h2= "Results for: "+@election.name
 
 %table
-    %tr
-        %th Choice
-        %th Total
-        %th(width="50%") Graph
-    
-    -#@winner = nil
-    -@election.choices.each do |choice|
-        %tr
-            %td=choice.text
-            %td=choice.total
-            %td
-                -if @election.total > 0
-                    - percent = (choice.total.to_f * 100 / @election.total).round
-                    .bar(style="width: #{percent}%")
-                        = "&nbsp;"+percent.to_s+"%"
-            -#@winner = choice if (!@winner || choice.total > @winner.total)
-    %tr
-        %td Spoiled Ballots
-        %td= @election.spoils.size
-        %td
-            -if @election.total > 0
-                - percent = (@election.spoils.size.to_f * 100 / @election.total).round
-                .bar(style="width: #{percent}%" class='spoil')
-                    = "&nbsp;"+percent.to_s+"%"
-            
+	%tr
+		%th Choice
+		%th Total
+		%th(width="50%") Graph
+	
+	-#@winner = nil
+	-@election.choices.each do |choice|
+		%tr
+			%td=choice.text
+			%td=choice.total
+			%td
+				-if @election.total > 0
+					- percent = (choice.total.to_f * 100 / @election.total).round
+					.bar(style="width: #{percent}%")
+						= "&nbsp;"+percent.to_s+"%"
+			-#@winner = choice if (!@winner || choice.total > @winner.total)
+	%tr
+		%td Spoiled Ballots
+		%td= @election.spoils.size
+		%td
+			-if @election.total > 0
+				- percent = (@election.spoils.size.to_f * 100 / @election.total).round
+				.bar(style="width: #{percent}%" class='spoil')
+					= "&nbsp;"+percent.to_s+"%"
+			
+		
+	%tr
+		%th Total
+		%th= @election.total
+		%th
+		 
+-if @election.preferential		
+	- win_id = calculate_winner_preferential(@election)
+	- if win_id == :spoiled
+		Election was spoiled
+		- @winner = :spoiled
+	- else
+		- @winner = @election.choices.find(win_id)
         
-    %tr
-        %th Total
-        %th= @election.total
-        %th
-       
--if @election.preferential        
-    - winner = calculate_winner_preferential(@election)
-    - if winner == :spoiled
-        Election was spoiled
-        - @winner = :spoiled
-    - else
-        - @winner = @election.choices.find(winner)
-%h2= "Winner is: "+ @winner.text unless @winner == :spoiled
--if @election.preferential
-    %p Note: The above results are completely wrong, b/c this is a preferential election. Fix coming soon.
+-if @winner == :spoiled
+	Election was spoiled
+-else	
+	%h2= "Winner is: "+ @winner.text

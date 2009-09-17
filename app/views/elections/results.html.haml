@@ -31,7 +31,14 @@
 		%th Total
 		%th= @election.total
 		%th
-		
-%h2=# "Winner is: "+ @winner.text
+   	
+-if @election.preferential        
+	- winner = calculate_winner_preferential(@election)
+	- if winner == :spoiled
+		Election was spoiled
+		- @winner = :spoiled
+	- else
+		- @winner = @election.choices.find(winner)
+%h2= "Winner is: "+ @winner.text unless @winner == :spoiled
 -if @election.preferential
 	%p Note: The above results are completely wrong, b/c this is a preferential election. Fix coming soon.

@@ -1,51 +1,7 @@
 %h2= "Results for: "+@election.name
 
 -if @election.preferential		
-	-first_ballots = {}
-	-first_ballots.default = 0
-	-@election.ballots.each do |b|
-		-b.votes.each do |v|
-			-if v.result == 1
-				-first_ballots[v.choice_id] += 1
-	-second_ballots = {}
-	-second_ballots.default = 0
-	-@election.ballots.each do |b|
-		-b.votes.each do |v|
-			-if v.result == 2
-				-second_ballots[v.choice_id] += 1
-	-third_ballots = {}
-	-third_ballots.default = 0
-	-@election.ballots.each do |b|
-		-b.votes.each do |v|
-			-if v.result == 3
-				-third_ballots[v.choice_id] += 1
-	-fourth_ballots = {}
-	-fourth_ballots.default = 0
-	-@election.ballots.each do |b|
-		-b.votes.each do |v|
-			-if v.result == 4
-				-fourth_ballots[v.choice_id] += 1
-                
-	-win_id = calculate_winner_preferential(@election)
-	-if win_id == :spoiled
-		Election was spoiled
-		-@winner = :spoiled
-	-else
-		-@winner = @election.choices.find(win_id)
-	%table
-		%tr
-			%th Choice
-			%th Total First Choices
-			%th Total Second Choices
-			%th Total Third Choices
-			%th Total Fourth Choices
-		-@election.choices.each do |choice|
-			%tr
-				%td=choice.text
-				%td=first_ballots[choice.id].to_s + " of " + first_ballots.values.sum.to_s
-				%td=second_ballots[choice.id].to_s + " of " + second_ballots.values.sum.to_s
-				%td=third_ballots[choice.id].to_s + " of " + third_ballots.values.sum.to_s
-				%td=fourth_ballots[choice.id].to_s + " of " + fourth_ballots.values.sum.to_s
+	= render :partial => 'preferential'
 -else        
 	%table
 		%tr

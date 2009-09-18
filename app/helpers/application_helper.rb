@@ -22,6 +22,16 @@ module ApplicationHelper
     end
     
     leader_id, leader_votes = candidates.max { |a,b| a[1] <=> b[1] }
+    loser_id, loser_votes = candidates.min { |a,b| a[1] <=> b[1] }
+    
+    if loser_votes == leader_votes
+      # There must be either a tie or a degenerate election
+      if candidates.size == 1 # Only one candidate, must be the winner
+        return leader_id
+      else
+        # TODO: add tie-breaking code here
+      end
+    end
     
     if leader_votes > total/2.0
       # max only returns one candidate, so check if two have the same amount of votes
@@ -34,8 +44,7 @@ module ApplicationHelper
       end
     else
       # Eliminate lowest-scoring candidate and re-run the vote counting
-      loser = candidates.min { |a,b| a[1] <=> b[1] }
-      adjusted_election = remove_candidate(loser[0], election)
+      adjusted_election = remove_candidate(loser_id, election)
       return calculate_winner_preferential(adjusted_election)
     end
     
@@ -47,9 +56,7 @@ module ApplicationHelper
         if vote.result == 1 && vote.choice_id == candidate_id
           vote.result = -1
           # Shift the other votes up
-          ballot.votes.each do |v|
-            v.result -= 1 if v.result != -1 and !v.result.nil?
-          end # each v
+          ballot.votes.each { |v| v.result -= 1 if v.result != -1 and !v.result.nil? }
           next
         end # each if
       end # each v

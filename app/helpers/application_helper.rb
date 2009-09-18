@@ -1,6 +1,6 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
-  
+
   def calculate_winner_preferential(election)
     candidates = { }
     candidates.default = 0
@@ -12,37 +12,43 @@ module ApplicationHelper
         end
       end
     end
-    # Counting the number of counted votes means we will automatically discount
-    # ballots that have had all their candidates eliminated
-    total = candidates.values.inject { |a,b| a + b }
+    
+    total = candidates.values.sum
     
     # Check if the majority of votes were spoiled, in which case the election is void
-    spoiled = candidates.keys.reject { |c| c != 0 }.size
-    if spoiled >= total/2
+    spoiled = candidates.keys.select { |c| c == 0 }.size
+    if spoiled > total/2.0
       return :spoiled # How do we want to indicate this?
     end
     
-    leader = candidates.max { |a,b| a[1] <=> b[1] }
-    if leader[1] >= total/2
-      return leader[0]
+    leader_id, leader_votes = candidates.max { |a,b| a[1] <=> b[1] }
+    
+    if leader_votes > total/2.0
+      # max only returns one candidate, so check if two have the same amount of votes
+      if candidates.select { |c_id,votes| votes == leader_votes }.size > 1
+        # Tie; return the tied candidates
+        # TODO: Add tie-breaking code here
+        return candidates.select { |c_id,votes| votes == leader_votes }.map { |c_id,votes| c_id }
+      else
+        return leader_id
+      end
     else
+      # Eliminate lowest-scoring candidate and re-run the vote counting
       loser = candidates.min { |a,b| a[1] <=> b[1] }
-      adjusted_election = remove_candidate(loser[0])
-      calculate_winner_preferential(adjusted_election)
+      adjusted_election = remove_candidate(loser[0], election)
+      return calculate_winner_preferential(adjusted_election)
     end
+    
   end
 
   def remove_candidate(candidate_id, election)
     election.ballots.each do |ballot|
-      # TODO: Also need to shift values up now
       ballot.votes.each do |vote|
         if vote.result == 1 && vote.choice_id == candidate_id
           vote.result = -1
           # Shift the other votes up
           ballot.votes.each do |v|
-            if v.result != -1
-              v.result -= 1
-            end # if
+            v.result -= 1 if v.result != -1 and !v.result.nil?
           end # each v
           next
         end # each if
@@ -50,4 +56,5 @@ module ApplicationHelper
     end #each b
     return election
   end #def
+  
 end

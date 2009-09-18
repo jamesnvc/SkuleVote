@@ -1,12 +1,6 @@
 %h2= "Results for: "+@election.name
 
 -if @election.preferential		
-	-win_id = calculate_winner_preferential(@election)
-	-if win_id == :spoiled
-		Election was spoiled
-		-@winner = :spoiled
-	-else
-		-@winner = @election.choices.find(win_id)
 	-first_ballots = {}
 	-first_ballots.default = 0
 	-@election.ballots.each do |b|
@@ -31,6 +25,13 @@
 		-b.votes.each do |v|
 			-if v.result == 4
 				-fourth_ballots[v.choice_id] += 1
+                
+	-win_id = calculate_winner_preferential(@election)
+	-if win_id == :spoiled
+		Election was spoiled
+		-@winner = :spoiled
+	-else
+		-@winner = @election.choices.find(win_id)
 	%table
 		%tr
 			%th Choice

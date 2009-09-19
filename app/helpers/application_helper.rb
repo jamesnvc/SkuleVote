@@ -7,9 +7,7 @@ module ApplicationHelper
     
     election.ballots.each do |ballot|
       ballot.votes.each do |vote|
-        if vote.result == 1
-          candidates[vote.choice_id] += 1
-        end
+        candidates[vote.choice_id] += 1 if vote.result == 1
       end
     end
     

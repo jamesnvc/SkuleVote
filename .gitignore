@@ -1,3 +1,4 @@
+public/stylesheets/*.css
 config/database.yml
 *~
 *.cache

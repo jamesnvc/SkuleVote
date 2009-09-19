@@ -16,7 +16,7 @@ module ApplicationHelper
     # Check if the majority of votes were spoiled, in which case the election is void
     spoiled = candidates.keys.select { |c| c == 0 }.size
     if spoiled > total/2.0
-      return :spoiled # How do we want to indicate this?
+      return [:spoiled , spoiled] # How do we want to indicate this?
     end
     
     leader_id, leader_votes = candidates.max { |a,b| a[1] <=> b[1] }
@@ -25,9 +25,11 @@ module ApplicationHelper
     if loser_votes == leader_votes
       # There must be either a tie or a degenerate election
       if candidates.size == 1 # Only one candidate, must be the winner
-        return leader_id
+        return [leader_id, spoiled]
       else
         # TODO: add tie-breaking code here
+        return [candidates.select { |c_id,votes|
+          votes == leader_votes and c_id != 0 }.map { |c_id,votes| c_id }, spoiled]
       end
     end
     
@@ -36,9 +38,9 @@ module ApplicationHelper
       if candidates.select { |c_id,votes| votes == leader_votes }.size > 1
         # Tie; return the tied candidates
         # TODO: Add tie-breaking code here
-        return candidates.select { |c_id,votes| votes == leader_votes }.map { |c_id,votes| c_id }
+        return [candidates.select { |c_id,votes| votes == leader_votes }.map { |c_id,votes| c_id }, spoiled]
       else
-        return leader_id
+        return [leader_id, spoiled]
       end
     else
       # Eliminate lowest-scoring candidate and re-run the vote counting

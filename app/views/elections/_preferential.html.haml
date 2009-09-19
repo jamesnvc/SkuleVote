@@ -1,4 +1,4 @@
--win_id = calculate_winner_preferential @election
+-win_id, num_spoiled = calculate_winner_preferential @election
 -if win_id == :spoiled
 	-@winner = :spoiled
 -elsif win_id.class == Array
@@ -19,3 +19,4 @@
 			%td.prefcount=@second_ballots[choice.id].to_s + " of " + @second_ballots.values.sum.to_s
 			%td.prefcount=@third_ballots[choice.id].to_s + " of " + @third_ballots.values.sum.to_s
 			%td.prefcount=@fourth_ballots[choice.id].to_s + " of " + @fourth_ballots.values.sum.to_s
+%p= "(" + pluralize(num_spoiled, "ballot") + " spoiled)"

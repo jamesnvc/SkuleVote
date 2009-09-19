@@ -14,7 +14,7 @@ module ApplicationHelper
     total = candidates.values.sum
     
     # Check if the majority of votes were spoiled, in which case the election is void
-    spoiled = candidates.keys.select { |c| c == 0 }.size
+    spoiled = candidates[0]
     if spoiled > total/2.0
       return [:spoiled , spoiled] # How do we want to indicate this?
     end

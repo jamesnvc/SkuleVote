@@ -56,7 +56,7 @@ module ApplicationHelper
         if vote.result == 1 && vote.choice_id == candidate_id
           vote.result = -1
           # Shift the other votes up
-          ballot.votes.each { |v| v.result -= 1 if v.result != -1 and !v.result.nil? }
+          ballot.votes.each { |v| v.result -= 1 if v.result >= 0 and !v.result.nil? }
           next
         end # each if
       end # each v

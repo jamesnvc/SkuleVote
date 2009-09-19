@@ -1,7 +1,7 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
-  def calculate_winner_preferential(election)
+  def calculate_winner_preferential election
     candidates = { }
     candidates.default = 0
     
@@ -50,7 +50,7 @@ module ApplicationHelper
     
   end
 
-  def remove_candidate(candidate_id, election)
+  def remove_candidate candidate_id, election
     election.ballots.each do |ballot|
       ballot.votes.each do |vote|
         if vote.result == 1 && vote.choice_id == candidate_id

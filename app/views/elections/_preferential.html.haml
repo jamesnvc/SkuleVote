@@ -1,19 +1,19 @@
--win_id = calculate_winner_preferential(@election)
+-win_id = calculate_winner_preferential @election
 -if win_id == :spoiled
 	-@winner = :spoiled
 -else
 	-@winner = @election.choices.find(win_id)
-%table
+%table#prefresults
 	%tr
 		%th Choice
-		%th Total First Choices
-		%th Total Second Choices
-		%th Total Third Choices
-		%th Total Fourth Choices
+		%th.prefcount Total First Choices
+		%th.prefcount Total Second Choices
+		%th.prefcount Total Third Choices
+		%th.prefcount Total Fourth Choices
 	-@election.choices.each do |choice|
 		%tr
 			%td=choice.text
-			%td=@first_ballots[choice.id].to_s + " of " + @first_ballots.values.sum.to_s
-			%td=@second_ballots[choice.id].to_s + " of " + @second_ballots.values.sum.to_s
-			%td=@third_ballots[choice.id].to_s + " of " + @third_ballots.values.sum.to_s
-			%td=@fourth_ballots[choice.id].to_s + " of " + @fourth_ballots.values.sum.to_s
+			%td.prefcount=@first_ballots[choice.id].to_s + " of " + @first_ballots.values.sum.to_s
+			%td.prefcount=@second_ballots[choice.id].to_s + " of " + @second_ballots.values.sum.to_s
+			%td.prefcount=@third_ballots[choice.id].to_s + " of " + @third_ballots.values.sum.to_s
+			%td.prefcount=@fourth_ballots[choice.id].to_s + " of " + @fourth_ballots.values.sum.to_s

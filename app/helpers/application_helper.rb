@@ -25,7 +25,8 @@ module ApplicationHelper
     # Find the candidates with the most and least votes
     leader_id, leader_votes = real_candidates.max { |a,b| a[1] <=> b[1] }
     loser_id, loser_votes = real_candidates.min { |a,b| a[1] <=> b[1] }
-    
+
+    # Create a closure that we'll use to resolve ties
     resolve_tie = lambda do # have to use a lambda to capture variables in the outer scope
       # Currently just return all the tied candidates
       tied = real_candidates.select { |c_id,votes| votes == leader_votes }
@@ -34,11 +35,11 @@ module ApplicationHelper
     
     if loser_votes == leader_votes
       # There must be either a tie or a degenerate election
-      if candidates.size == 1 # Only one candidate, must be the winner
+      if real_candidates.size == 1 # Only one candidate, must be the winner
         return [leader_id, spoiled]
       else
         # TODO: add tie-breaking code here
-        resolve_tie.call
+        return resolve_tie.call
       end
     end
     
@@ -47,14 +48,13 @@ module ApplicationHelper
       if real_candidates.values.select { |votes| votes == leader_votes }.size > 1
         # Tie; return the tied candidates
         # TODO: Add tie-breaking code here
-        resolve_tie.call
+        return resolve_tie.call
       else
         return [leader_id, spoiled]
       end
     else
       # Eliminate lowest-scoring candidate and re-run the vote counting
-      adjusted_election = remove_candidate(loser_id, election)
-      return calculate_winner_preferential(adjusted_election)
+      return calculate_winner_preferential( remove_candidate(loser_id, election) )
     end
     
   end

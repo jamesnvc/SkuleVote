@@ -38,6 +38,6 @@
 -if @winner == :spoiled
 	Election was spoiled
 -elsif @winner.class == Array
-	%h2= "Tie; Winners are " + @winner.map {|w| w.text }.join(', ')
+	%h2= "Tie; Winners are #{@winner.map {|w| w.text }.join(', ')}"
 -else    
-	%h2= "Winner is: "+ @winner.text
+	%h2= "Winner is: #{@winner.text}"

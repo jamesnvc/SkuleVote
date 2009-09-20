@@ -6,7 +6,12 @@ class CreateVotes < ActiveRecord::Migration
       t.integer :ballot_id
       t.integer :result
     end
+    
+    add_index :votes, :election_id
+    add_index :votes, :choice_id
+    add_index :votes, :ballot_id
   end
+  
 
   def self.down
     drop_table :votes

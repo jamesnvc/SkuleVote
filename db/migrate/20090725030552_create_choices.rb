@@ -3,7 +3,10 @@ class CreateChoices < ActiveRecord::Migration
     create_table :choices do |t|
       t.integer :election_id
       t.string :name
+      t.text :description
     end
+    
+    add_index :choices, :election_id
   end
 
   def self.down

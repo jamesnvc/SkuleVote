@@ -1,0 +1,9 @@
+SkuleVote
+- if ["admin", "results", "ballots", "new", "edit"].include?(action_name.to_s)
+	=" : "+"Admin"+" : "+action_name.capitalize
+- if @election && @election.name
+	=" : "+@election.name
+- if RAILS_ENV.to_s == "development"
+	(
+	=controller_name+" : "+action_name
+	)

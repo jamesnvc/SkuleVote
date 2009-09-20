@@ -5,8 +5,10 @@ class CreateBallots < ActiveRecord::Migration
 
       t.datetime :created_at
     end
+    
+    add_index :ballots, :election_id
   end
-
+  
   def self.down
     drop_table :ballots
   end

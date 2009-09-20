@@ -82,6 +82,17 @@ ul.elections
 			:padding 0 0.25em
 			:white-space nowrap
 			:overflow hidden
+			
+			.info
+				:display block
+				:width 1.5em
+				:height 1.5em
+				:margin 0 0 0 -0.25em
+				:background url(/images/icons/information.png) no-repeat center
+				//:position absolute
+				:top 0
+				:left 0
+				:float left
 		
 	ul#start, ul#end
 		:width 45%
@@ -119,7 +130,7 @@ ul.elections
 		:background none
 		
 		li
-			:background #ccc url(/images/icons/bullet_black.png) 95% center no-repeat
+			:background #ccc url(/images/icons/bullet_go.png) 95% center no-repeat
 			//:cursor url(/images/cursors/grab.cur), default
 	ul#numbers
 		li
@@ -128,10 +139,15 @@ ul.elections
 		+rounded-corners
 		:background #eee
 		li
-			:background #eee url(/images/icons/bullet_green.png) 95% center no-repeat
+			:background #eee url(/images/icons/tick.png) 95% center no-repeat
 			//:cursor url(/images/cursors/grabbing.cur), default
 			
-			
+	&.preferential
+		h3
+			:float left
+			:width 50%
+		h4
+			:margin 0
 form 
 	ol
 		:margin 0
@@ -169,6 +185,9 @@ form
 .new form,
 .edit form
 	fieldset
+		li
+			:margin 1em 0
+	     
 		label
 			:font-size 1.25em
 			:width 25%
@@ -195,6 +214,9 @@ form
 			:margin 0 0 1.5em 25%
 			:padding 0.5em
 				
+		#choices
+			label
+				:clear left
 			
 a.back
 	:font-size 2em

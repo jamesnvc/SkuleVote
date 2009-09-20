@@ -1,10 +1,16 @@
 ActionController::Routing::Routes.draw do |map|
+
   map.resources :voters
+  map.resource :voter_session
+  map.resource :account, :controller => "voters"
+
 
 
   #USER
-  map.root :controller => "elections"
+  map.root :controller => "elections", :action => 'public'
   map.connect "help", :controller => 'elections', :action => 'help'
+  
+  map.connect "vote", :controller => "voter_sessions", :action => 'new'
   
   #ADMIN
   map.connect 'admin', :controller => 'elections', :action => 'admin'
@@ -15,7 +21,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.connect 'elections/:id/:action', :controller => 'elections'
   
-  
+  map.connect 'public', :controller => 'elections', :action => 'public'
   
   
   # The priority is based upon order of creation: first created -> highest priority.

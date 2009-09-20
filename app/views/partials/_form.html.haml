@@ -31,13 +31,12 @@
 					= election.label :method_multiple_choice, "Multiple Choice"
 
 			%li
-				= election.label :eligible_year, "Eligible Year<em title='not functional yet'>^</em>"
-				= election.text_field :eligible_year 
+				= election.label :eligible_year, "Eligible Year"
+				= election.select :eligible_year, [1,2,3,4], {:include_blank => "All"}
 
 			%li
-				= election.label :eligible_discipline, "Eligible Discipline<em title='not functional yet'>^</em>"
-				= election.text_field :eligible_discipline 
-				
+				=election.label :eligible_discipline, "Eligible Discipline"
+				=election.select :eligible_discipline, disciplines, {:include_blank => "All"}
 			
 	%fieldset
 		%legend Choices

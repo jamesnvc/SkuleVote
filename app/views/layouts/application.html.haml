@@ -5,7 +5,7 @@
 %head
 	%meta(http-equiv="content-type" content="text/html;charset=UTF-8")
 
-	%title= "SkuleVote : "+controller.controller_name+" : "+controller.action_name
+	%title= render :partial => "partials/title"
 
 	= stylesheet_link_tag 'screen.css'
 	= javascript_include_tag :defaults
@@ -22,8 +22,11 @@
 	%ul#menu
 		%li= link_to "Home", "/"
 		%li= link_to "Help", :controller => "elections", :action => 'help'
-		%li= link_to "Sign Out", "#"
+		-if current_voter
+			%li= link_to "Sign Out", voter_session_path, :method => :delete
 
 	%div#content
 		= yield
 		%br(style="clear: both")
+	- if RAILS_ENV.to_s == "development"
+		=debug(current_voter)

@@ -8,7 +8,7 @@
 		= election.hidden_field :id
 
 	= link_to "&laquo; Vote Later", "/", :class => 'back' 
-	= f.submit "Cast Vote", :disabled => true, :id => 'submit', :class => 'disabled' 	
+	= f.submit "Cast Vote", :disabled => true, :id => 'submit', :class => 'disabled', :confirm => 'Cast Ballot: Are you sure?' 	
 	= f.submit "Spoil Ballot", :id => 'spoil', :confirm => 'Spoil Ballot: Are you sure?'
 
 

@@ -33,12 +33,11 @@ class ElectionsController < ApplicationController
   	@election = Election.find(params[:id])  	
     if @election.preferential
       # Populate hashes to show the proportion of votes each candidate got
-      @first_ballots = Hash.new
-      @second_ballots = Hash.new
-      @third_ballots = Hash.new
-      @fourth_ballots = Hash.new
+      @first_ballots = Hash.new(0)
+      @second_ballots = Hash.new(0)
+      @third_ballots = Hash.new(0)
+      @fourth_ballots = Hash.new(0)
       ballot_scores = [@first_ballots, @second_ballots, @third_ballots, @fourth_ballots]
-      ballot_scores.each { |h| h.default = 0 }
       ballot_scores.each_index do |i|
         @election.ballots.each do |b|
           b.votes.each { |v| ballot_scores[i][v.choice_id] += 1 if v.result == i+1 }

@@ -47,7 +47,7 @@ class ElectionsController < ApplicationController
       win_id, @num_spoiled = Results::Preferential.calculate_winner_preferential(@election)
       if win_id == :spoiled
         @winner = :spoiled
-      elsif win_id.class == Array
+      elsif win_id.is_a?(Array)
         @winner = win_id.map { |id| @election.choices.find(id) }  
       else
         @winner = @election.choices.find(win_id)

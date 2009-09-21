@@ -1,5 +1,5 @@
 class ElectionsController < ApplicationController
-  include Results::Preferential
+  
   before_filter :authenticate, :except => [:index, :vote, :help]
 
   def index
@@ -44,7 +44,7 @@ class ElectionsController < ApplicationController
         end
       end
       # Get the winner
-      win_id, @num_spoiled = calculate_winner_preferential(@election)
+      win_id, @num_spoiled = Results::Preferential.calculate_winner_preferential(@election)
       if win_id == :spoiled
         @winner = :spoiled
       elsif win_id.class == Array

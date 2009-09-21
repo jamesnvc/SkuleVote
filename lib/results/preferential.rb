@@ -1,7 +1,7 @@
 module Results::Preferential
   
-# Determine the winner of a preferential-type election
-  def calculate_winner_preferential election
+  # Determine the winner of a preferential-type election
+  def self.calculate_winner_preferential(election)
     candidates = { }
     candidates.default = 0
     
@@ -54,14 +54,14 @@ module Results::Preferential
       end
     else
       # Eliminate lowest-scoring candidate and re-run the vote counting
-      return calculate_winner_preferential( remove_candidate(loser_id, election) )
+      return calculate_winner_preferential( self.remove_candidate(loser_id, election) )
     end
     
   end
 
   # Helper function for calculate_winner_preferential
   # Returns the election with the candidate with the given id removed
-  def remove_candidate candidate_id, election
+  def self.remove_candidate candidate_id, election
     election.ballots.each do |ballot|
       ballot.votes.each do |vote|
         if vote.result == 1 && vote.choice_id == candidate_id

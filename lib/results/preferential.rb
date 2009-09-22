@@ -1,7 +1,7 @@
 module Results::Preferential
   
   # Determine the winner of a preferential-type election
-  def self.calculate_winner_preferential(election)
+  def self.calculate_winner_preferential election
     candidates = { }
     candidates.default = 0
     

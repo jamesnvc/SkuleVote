@@ -12,5 +12,6 @@ doc/app
 doc/plugins
 coverage/*
 db/*.sqlite3
+db/*.sqlite
 *.tmproj
 Capfile

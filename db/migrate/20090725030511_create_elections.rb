@@ -14,6 +14,11 @@ class CreateElections < ActiveRecord::Migration
 
       t.timestamps
     end
+    
+    add_index :elections, :start
+    add_index :elections, :end
+    add_index :elections, :eligible_year
+    add_index :elections, :eligible_discipline
   end
 
   def self.down

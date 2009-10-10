@@ -1,19 +1,33 @@
 %div#vote.preferential
+	
+	%h3 Available Candidates
+	%h3 Ranked Candidates
 	%ul#start.noMessage
 		- i = 1
 		- @choices.each do |choice|
 			%li{:id => 'element_'+choice.id.to_s}
+				%span.info(title="#{choice.description.length > 0 ? choice.description : 'No statement provided.'}")
 				=choice.name
+				
 		%div#start_drop_message Drop
-		
+	
 	%ul#numbers
 		- (1..@election.choices.count).each do |i|
 			%li= i
 
+	
 	%ul#end
 		%div#end_drop_message Drop
 
 	%br(style="clear: both")
+	
+	%h4 Instructions
+	%p 
+		Drag and drop candidates from left to right. Reorder if necessary.
+		%br
+		Hover over the information icon (i) to display the candidate's statement.
+		%br
+		The right column contains a ranked list of candidates you are voting for.
 	
 	- @choices.each do |choice|
 		= f.hidden_field :result, :index => choice.id, :size => 1

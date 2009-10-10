@@ -1,24 +1,35 @@
+require 'digest/md5'
+
+
 class ElectionsController < ApplicationController
-  
-  before_filter :authenticate, :except => [:index, :vote, :help]
+  before_filter :authenticate, :except => [:index, :vote, :help, :public]
+  before_filter :require_voter, :only => [:index, :vote]
+  before_filter :validate_eligibility, :only => [:vote]
+
+  def public
+  	if current_voter
+  	  redirect_to :action => :index
+  	end
+  end
 
   def index
-    @elections = Election.all
-    # should include .active conditional here, or via sql
-    
+   # @elections = Election.find(:all, :conditions => {:eligible_year => [current_voter.year, nil, "", 'null'], :eligible_discipline => [current_voter.discipline, nil, "", 'null']})
+    @elections = Election.find(:all, :conditions => "(eligible_year IN (#{current_voter.year}, '') OR eligible_year ISNULL) AND (eligible_discipline IN ('#{current_voter.discipline}', '') OR eligible_discipline ISNULL)")
+	@elections -= current_voter.elections
   end
 
   def vote
     @election = Election.find(params[:id])
     
     if @election.random
-    	@choices = @election.choices.sort_by {rand}
+     	@choices = @election.choices.sort_by {rand}
     else
       @choices = @election.choices
     end
     
     @ballot = Ballot.new
     @vote = Vote.new
+    
   end
   
   def admin
@@ -145,5 +156,40 @@ class ElectionsController < ApplicationController
     end
   end
   
+  def validate_eligibility
+    @election = Election.find(params[:id])
+    #note: all conditions must true to be eligible
+    checks = {}
+    v = current_voter
+    #always
+    #checks["hasntvotedyet"] = !v.elections.includes?(@election)
+    checks["student"] = v.student #must be true
+    checks["registered"] = v.registered #must be true
+    checks["undergrad"] = v.undergrad #must be true
+    checks["org"] = v.org == "APSC"
+    checks["campus"] = v.campus == "SGT"
+	checks["attendance"] = v.attendance == "FT"
+	
+    #sometimes
+    checks["year"] = v.year == @election.eligible_year if @election.eligible_year
+    checks["discipline"] = v.discipline == @election.eligible_discipline if @election.eligible_discipline && @election.eligible_discipline.length > 0 
+    #checks["pey"] = v.pey
+    
+    eligible = true
+    #if all checks pass, return true
+    checks.each do |key,value|
+      if !value #if any are false
+      	eligible = false
+      end
+    end
+    
+    if eligible
+    
+    else
+    	flash[:notice] = "You are not eligible to vote in this election."
+        redirect_to :controller => :elections, :action => :index
+    end
+    
+  end
   
 end

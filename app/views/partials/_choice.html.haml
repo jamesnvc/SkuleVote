@@ -2,6 +2,8 @@
 	%li
 		= choice.label :name
 		= choice.text_field :name
+		= choice.label :description
+		= choice.text_field :description
 		= choice.hidden_field :id
 		- unless choice.object.new_record?
 			=choice.label :_delete, "Remove:", :class => 'remove'

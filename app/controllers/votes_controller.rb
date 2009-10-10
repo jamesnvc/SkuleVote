@@ -1,4 +1,7 @@
 class VotesController < ApplicationController
+
+  before_filter :require_voter
+  
   # POST /votes
   # POST /votes.xml
   def create
@@ -20,6 +23,8 @@ class VotesController < ApplicationController
         #@votes = @ballot.votes.build params[:vote].values
       end
     end
+    
+    @election.voters << current_voter
     
     if @election.save
       if params[:commit] == "Spoil Ballot"

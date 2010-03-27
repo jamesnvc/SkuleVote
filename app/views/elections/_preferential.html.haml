@@ -1,15 +1,11 @@
 %table#prefresults
 	%tr
 		%th Choice
-		%th.prefcount Total First Choices
-		%th.prefcount Total Second Choices
-		%th.prefcount Total Third Choices
-		%th.prefcount Total Fourth Choices
+		- @ballot_scores.each_index do |idx|
+			%th.prefcount= "Total #{(idx-1).ordinalize} Choices"
 	-@election.choices.each do |choice|
 		%tr
 			%td=choice.text
-			%td.prefcount=@first_ballots[choice.id].to_s + " of " + @first_ballots.values.sum.to_s
-			%td.prefcount=@second_ballots[choice.id].to_s + " of " + @second_ballots.values.sum.to_s
-			%td.prefcount=@third_ballots[choice.id].to_s + " of " + @third_ballots.values.sum.to_s
-			%td.prefcount=@fourth_ballots[choice.id].to_s + " of " + @fourth_ballots.values.sum.to_s
+			- @ballot_scores.each_index do |idx|
+				%td.prefcount=@ballot_scores[idx][choice.id].to_s + " of " + @ballot_scores[idx].values.sum.to_s
 %p= "(#{pluralize(@num_spoiled, "ballot")} spoiled)"
